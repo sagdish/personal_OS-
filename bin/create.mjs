@@ -70,7 +70,7 @@ console.log(`
 Done. Next:
 
   cd "${target}"
-  bin/os install
+  node bin/os.mjs install
 
 then open your AI in that folder and type /setup (Claude Code), or tell it
 "open SETUP.md and follow it". One question at a time, about ten minutes.

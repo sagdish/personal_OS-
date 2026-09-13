@@ -39,5 +39,19 @@
     "@anthropic-ai/sdk": "^0.125.0",
     "yaml": "^2.9.1"
   },
-  "keywords": ["personal-os", "life-os", "markdown", "claude-code", "second-brain"]
+  "keywords": [
+    "personal-os",
+    "life-os",
+    "markdown",
+    "claude-code",
+    "second-brain"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagdish/personal_OS.git"
+  },
+  "homepage": "https://github.com/sagdish/personal_OS#readme",
+  "bugs": {
+    "url": "https://github.com/sagdish/personal_OS/issues"
+  }
 }

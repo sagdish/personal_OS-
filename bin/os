@@ -1,3 +1,9 @@
 #!/usr/bin/env sh
 # os — the one command. Everything lives in os.mjs; this only finds node.
+if ! command -v node >/dev/null 2>&1; then
+  echo "Personal OS needs Node, and this terminal cannot find it."
+  echo "Not installed yet: get it at https://nodejs.org (the LTS button), run the installer,"
+  echo "then open a NEW terminal window and try again. Already installed: open a new window first."
+  exit 1
+fi
 exec node "$(dirname "$0")/os.mjs" "$@"
