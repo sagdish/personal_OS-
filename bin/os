@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# os — the one command. Everything lives in os.mjs; this only finds node.
+exec node "$(dirname "$0")/os.mjs" "$@"

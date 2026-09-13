@@ -1,0 +1,23 @@
+# The machine's own files. Never commit these.
+node_modules/
+app/.next/
+*.tsbuildinfo
+_system/state/*
+!_system/state/.gitkeep
+_system/logs/*
+!_system/logs/.gitkeep
+.env.local
+.DS_Store
+# The author's design notes, kept local.
+BLUEPRINT.md
+
+# Your life. Not committed: this folder can be a public fork and leak nothing.
+# Set git.life_in_git: true in os.yaml and re-run `os apply` to commit everything (a private backup repo).
+os.yaml
+MANAGER.md
+STATUS.md
+AGENTS.md
+areas/
+journal/
+.claude/skills/coach-*/
+!.claude/skills/coach-off/

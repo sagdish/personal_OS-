@@ -1,0 +1,20 @@
+{
+  "name": "personal-os",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Your life as plain files, one AI voice that reads them once a day, a page that shows where you stand.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "os": "node bin/os.mjs",
+    "doctor": "node bin/os.mjs doctor",
+    "read": "node bin/os.mjs read"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
+    "yaml": "^2.9.1"
+  }
+}
