@@ -220,8 +220,8 @@ async function cmdTick() {
   }
 }
 
-function cmdApply() {
-  const { answers, done } = apply();
+function cmdApply(flags) {
+  const { answers, done } = apply({ fromAnswers: flags.has("--from-answers") });
   say(`applied for ${answers.os_name}:\n  ${done.join("\n  ")}`);
   say(`\nnext: write the words into MANAGER.md and each area's README.md, then \`os doctor\`, \`os read\`, \`os install\`, \`os\`.`);
 }
@@ -266,7 +266,7 @@ const HELP = `os — the one command
   os doctor           the pollution check. Red is a real fault  (--warn never fails)
   os read             the read, now  (--dry-run shows what it would send, free · --force skips the cooldown)
   os tick             what the schedule runs every 30 minutes
-  os apply            build the structure from the setup answers
+  os apply            build the structure from os.yaml  (--from-answers: from the setup answers first)
   os install          the packages, the os alias and, once set up, the schedule  (--uninstall · --yes adds the cron line on Linux · --no-alias)
   os inbox sort       move the dock into the inbox tree now.  os inbox list [days] prints entries with ids
   os capture "text"   append to the dock, verbatim, stamped
@@ -289,7 +289,7 @@ export async function main(argv) {
     case "doctor": return cmdDoctor(flags);
     case "read": return cmdRead(flags);
     case "tick": return cmdTick();
-    case "apply": return cmdApply();
+    case "apply": return cmdApply(flags);
     case "install": return cmdInstall(flags);
     case "inbox": return cmdInbox(args);
     case "capture": {

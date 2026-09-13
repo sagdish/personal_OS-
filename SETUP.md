@@ -8,9 +8,9 @@ start.
 - **One question at a time.** Ask, wait for the answer, write it down, then the next one. Never a
   list of questions, never two in one message. One or two plain sentences per question.
 - Write every answer as you get it into `_system/state/setup.yaml` (the shape is at the end of
-  this file). If that file already exists, read it first and say in one line what is already
-  answered; continue from the first crucial answer that is empty, or ask what they want to change.
-  Nothing they wrote anywhere else is ever touched.
+  this file). If `os.yaml` already exists, this is a re-run: read `os.yaml` first (it is the truth,
+  they may have edited it by hand), bring the answers file in line with it, say in one line what is
+  already set, and ask what they want to change. Nothing they wrote anywhere else is ever touched.
 - Ask in the language they write in. Record it as `language` (a code: `en`, `de`, `ru`, …).
 - Optional questions are introduced as optional: "Optional, skip if you like." A skip is an answer.
 - Do not explain the whole system first. One sentence of welcome, then question 1.
@@ -63,7 +63,7 @@ Machine:
 
 ## Then, without asking
 
-1. Run `node bin/os.mjs apply` and read what it prints. If it reports a problem with the answers,
+1. Run `node bin/os.mjs apply --from-answers` and read what it prints. If it reports a problem with the answers,
    fix `_system/state/setup.yaml` and run it again.
 2. Write the portrait. `MANAGER.md` has the headings; fill each with prose in their words, from
    their answers, and from their notes if they gave a path (read those first). `## Core`: who they

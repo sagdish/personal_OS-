@@ -26,10 +26,10 @@ each part.
 
 ## Install
 
-The one command above does four things: it puts a `personal-os` folder in your home folder, it
-installs Node if you don't have it (the Mac asks for your password once), it installs Claude Code
-if you don't have it, and it installs the OS. A few minutes. A lot of text scrolls by; that is normal.
-At the end it prints the three lines to type next.
+The one command above does four things: it puts a `personal-os` folder where Terminal is (your home
+folder, in a new window), it installs Node if you don't have it (the Mac may ask for your password
+once), it installs Claude Code if you don't have it, and it installs the OS. A few minutes. A lot of
+text scrolls by; that is normal. At the end it prints the three lines to type next.
 
 To open Terminal on a Mac: press ⌘ and Space together, type `Terminal`, press Return.
 
@@ -47,18 +47,20 @@ Windows, or if you want to do each step yourself: see [By hand](#by-hand) at the
 4. Type `/setup`.
 5. Answer the questions, one at a time: your name, what to call the OS, the parts of your life it
    should hold (one to five), how it should talk to you, where you write (inside this folder is
-   fine), when the morning read should arrive. Then a few optional things, each marked optional;
-   skip what you don't want. Claude asks permission before it runs a command or writes a file. Say
-   yes; that is the setup working.
+   fine), when the morning read should arrive, whether it may suggest one next step. Then a few
+   optional things, each marked optional; skip what you don't want. Then how the read runs: Claude
+   Code with your subscription is the default and needs nothing. Claude asks permission before it
+   runs a command or writes a file. Say yes; that is the setup working.
 
-At the end it writes your portrait, runs the first read, sets the daily schedule, and opens the page
-in your browser. Done. Re-run `/setup` whenever your life changes; it changes only what you change.
+At the end it writes your portrait, runs the first read, sets the daily schedule (on Linux and
+Windows it shows you the one line to add), and opens the page in your browser. Done. Re-run
+`/setup` whenever your life changes; it changes only what you change.
 
 ## Every day
 
 1. **Write.** Anything, anywhere in your journal: the capture box on the page, `/capture` inside
-   Claude, or your phone through Obsidian if you use it. Your words, any format. Nothing you write
-   is ever changed or deleted.
+   Claude, or your phone through Obsidian if you use it. Your words, any format. They are never
+   rewritten or deleted.
 2. **Read.** The read arrives at your time, as a banner on a Mac and on the page. Where you stand,
    one line per area, what moved, at most one question. It also files what you wrote: a finished
    thing to wins, a task to goals, word for word.
@@ -77,12 +79,15 @@ costs about ten cents.
 
 **Where is my data?** On your computer, as text files you can open with anything. Nothing goes to
 the cloud except one message a day to your AI provider: the facts of your day and your portrait.
-The page runs on your machine only.
+When you talk to a coach or run `/setup`, what you show Claude in that session goes to Claude, as
+with any AI tool. The page runs on your machine only.
 
 **Can I use it on my phone?** For writing, yes, if your journal is an Obsidian folder (say so at
 setup). The page itself is on your computer.
 
-**What if I stop using it?** The files stay. Delete the folder and it is gone. Nothing else changes.
+**What if I stop using it?** Type `os install --uninstall` in the folder (it removes the daily
+schedule and the `os` shortcut), then delete the folder. Node and Claude Code stay; they are
+ordinary programs you can keep or remove like any other.
 
 **Can I change my areas later?** Yes. Type `/setup` again inside Claude. Your notes stay.
 
@@ -93,8 +98,8 @@ setup asks for.
 **Does the read run when the laptop is closed?** No. It runs when the machine is awake and the time
 has passed. A missed morning runs when the lid opens.
 
-**Is anything sent without me knowing?** Once a day, the read. Nothing else, ever. `os read --dry-run`
-shows you exactly what it would send.
+**Is anything sent without me knowing?** Only the read, once a day at your time, and whenever you
+run it yourself. `os read --dry-run` shows you exactly what it sends, without sending it.
 
 ## Commands
 
@@ -126,6 +131,8 @@ Windows type `node bin\os.mjs`.)
 | `os win "text"` | one line to your wins |
 | `os file <id> <to>` | copy one inbox entry to `wins`, `goals` (add the area) or `challenge` |
 | `os portrait <area>` | print your portrait for one voice; `all` for the whole thing |
+| `os apply` | rebuild the folders, the coaches and the instructions from `os.yaml`, after you edited it |
+| `os help` | this list |
 
 ## Where things are
 
@@ -149,14 +156,17 @@ journal/         your writing, or the Obsidian folder you named at setup
   weeks/           weekly reviews (if on)
 .claude/skills/  the commands above, one file each
 bin/os           the one command
+install.sh       the one-command installer
 app/             the page
 _system/         the machine. Not yours to edit
 node_modules/    the packages the install downloaded. Big, normal, leave it
+package.json     the machine's package list, and package-lock.json. Leave them
+LICENSE          MIT
 .env.local       keys, if you gave any. Never in git
 ```
 
-**The journal is yours.** The machine only adds to it, and only your own words: a win, a task, a
-challenge line, a copy of each read. It never edits or deletes what you wrote.
+**The journal is yours.** The machine only adds to it: your own words filed as a win, a task or a
+challenge line, and a copy of each read. It never edits or deletes what you wrote.
 
 ## The daily read
 
@@ -241,9 +251,9 @@ irm https://claude.ai/install.ps1 | iex
 
 Then open a new window and type `claude` once to sign in.
 
-**3. The folder.** One of: `npx personal-os my-os` in Terminal, which makes the folder for you; or
-the green **Code** button then **Download ZIP** on [the GitHub page](https://github.com/sagdish/personal_OS),
-unzip by double-clicking; or `git clone https://github.com/sagdish/personal_OS.git`.
+**3. The folder.** Either the green **Code** button then **Download ZIP** on
+[the GitHub page](https://github.com/sagdish/personal_OS), unzip by double-clicking, and put the
+folder wherever you keep things; or `git clone https://github.com/sagdish/personal_OS.git`.
 
 **4. The install.** Go into the folder in Terminal (`cd `, drag the folder onto the window, Return),
 then:

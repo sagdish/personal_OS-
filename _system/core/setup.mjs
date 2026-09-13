@@ -17,7 +17,7 @@ export const ANSWERS = path.join(STATE_DIR, "setup.yaml");
 export function slugify(label, taken = new Set(), n = 1) {
   let s = String(label ?? "")
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
@@ -27,6 +27,26 @@ export function slugify(label, taken = new Set(), n = 1) {
   let i = 2;
   while (taken.has(out)) out = `${s}-${i++}`;
   return out;
+}
+
+/** os.yaml -> the answers shape, so the structure can be rebuilt from the map alone. */
+export function mapToAnswers(m) {
+  return {
+    name: m.owner,
+    os_name: m.name,
+    language: m.language,
+    areas: (m.areas ?? []).map((x) => ({ key: x.key, label: x.label, moving: x.moving })),
+    modules: m.modules ?? {},
+    journal: m.journal ?? {},
+    read_at: m.rhythm?.read_at,
+    next_step: m.rhythm?.next_step,
+    practice: m.practice ?? [],
+    challenge: m.challenge ?? null,
+    provider: { kind: m.provider?.kind, model: m.provider?.model, base_url: m.provider?.base_url },
+    max_calls_per_day: m.provider?.max_calls_per_day,
+    life_in_git: m.git?.life_in_git,
+    port: m.app?.port,
+  };
 }
 
 export function readAnswers() {
@@ -65,7 +85,7 @@ export function normalize(a) {
   if (!["claude-code", "anthropic", "openai-compatible"].includes(provider.kind)) problems.push(`provider.kind "${provider.kind}" is not claude-code, anthropic or openai-compatible`);
   const read_at = String(a.read_at ?? "08:30").trim();
   if (!/^\d{1,2}:\d{2}$/.test(read_at)) problems.push(`read_at "${read_at}" is not HH:MM`);
-  if (problems.length) throw new Error(`setup answers are not complete:\n  - ${problems.join("\n  - ")}`);
+  if (problems.length) throw new Error(`cannot apply:\n  - ${problems.join("\n  - ")}`);
   return {
     name,
     os_name: String(a.os_name ?? "").trim() || `${name}'s OS`,
@@ -94,13 +114,24 @@ const writeIfMissing = (file, text) => {
   return true;
 };
 
-export function apply() {
-  const a = readAnswers();
+/**
+ * The source is os.yaml once it exists: edit it by hand and run `os apply`. The interview writes the
+ * answers file and runs `os apply --from-answers`, which turns the answers into os.yaml first.
+ */
+export function apply({ fromAnswers = false } = {}) {
   const done = [];
-
-  // The map. Only this function writes it.
+  let a;
+  if (fromAnswers || (!isSetUp() && fs.existsSync(ANSWERS))) {
+    a = readAnswers();
+    done.push("os.yaml, from the setup answers");
+  } else if (isSetUp()) {
+    a = normalize(mapToAnswers(map()));
+    done.push("os.yaml, as it is");
+  } else {
+    throw new Error("nothing to build from: no os.yaml and no setup answers. Run /setup.");
+  }
+  // The map, in its canonical form. Only this function writes it.
   writeMapText(t.osYaml(a));
-  done.push("os.yaml");
 
   // The areas.
   for (const x of a.areas) {
