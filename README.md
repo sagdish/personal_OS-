@@ -84,7 +84,7 @@ In your AI (Claude Code: type it; other tools: "run the <name> skill", or read
 | `/coach-off` | drops the coach |
 | `/weekly` | (if you turned it on) the week from above, written to your journal |
 
-In a terminal (`os` after `os install`; `bin/os` before; on Windows `node bin\\os.mjs`):
+In a terminal (`os` after `os install`; `bin/os` before; on Windows `node bin\os.mjs`):
 
 | Command | What it does |
 |---|---|
