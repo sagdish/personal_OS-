@@ -14,7 +14,7 @@ import { loadEnv } from "./env.mjs";
 export const FIXED_SKILLS = ["setup", "capture", "triage", "brief", "coach-off", "weekly"];
 
 const ROOT_FILES = new Set([
-  "README.md", "AGENTS.md", "CLAUDE.md", "SETUP.md", "BLUEPRINT.md", "LICENSE", "os.yaml", "MANAGER.md", "STATUS.md",
+  "README.md", "AGENTS.md", "CLAUDE.md", "SETUP.md", "BLUEPRINT.md", "LICENSE", "install.sh", "os.yaml", "MANAGER.md", "STATUS.md",
   "package.json", "package-lock.json", ".gitignore", ".env.local", ".DS_Store", ".gitattributes",
 ]);
 const ROOT_DIRS = new Set(["areas", "journal", "app", "bin", "_system", ".claude", ".git", "node_modules", ".github"]);

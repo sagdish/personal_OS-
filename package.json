@@ -25,7 +25,8 @@
     "CLAUDE.md",
     "SETUP.md",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "install.sh"
   ],
   "engines": {
     "node": ">=20"

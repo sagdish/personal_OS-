@@ -11,9 +11,28 @@ choose that at setup. Delete the machine and your life is still there as files y
 **What it is not:** a task manager that nags, a habit app with streaks, a chat you have to
 remember to open, therapy.
 
-## Before you start
+## Install
 
-You need two things on your computer. Both take a few minutes.
+One command, on a Mac or Linux. Open Terminal (Mac: press ⌘ and Space together, type `Terminal`,
+press Return), paste this, press Return:
+
+```
+curl -fsSL https://raw.githubusercontent.com/sagdish/personal_OS/main/install.sh | bash
+```
+
+It makes a `personal-os` folder in your home folder, puts Node and Claude Code on your computer if
+you don't have them (the Mac asks for your password once, for Node), installs the OS, and ends with
+the three lines to type next. A few minutes, a lot of text scrolling by; that is normal.
+
+Already downloaded the zip, or cloned it? Go into the folder in Terminal and type `bash install.sh`.
+Same thing, without the download.
+
+**Windows,** or if you would rather do each step yourself: the next section. Otherwise skip to
+[Set up](#set-up).
+
+## By hand
+
+What the one command does, as steps. You need two things on your computer first.
 
 **1. Node.** The engine everything here runs on. To check whether you have it, open Terminal
 (Mac: press ⌘ and Space together, type `Terminal`, press Return) and type this, then Return:
@@ -43,9 +62,7 @@ and follow instructions) works too. The daily read then needs an API key; setup 
 **Windows:** everything below works in PowerShell. Where this manual says `bin/os`, type
 `node bin\os.mjs`. Where it says `os`, the same.
 
-## Get it
-
-Any one of these gives you the same folder.
+**3. The folder.** Any one of these gives you the same folder.
 
 **The quick way.** In Terminal, type this and press Return:
 
@@ -62,10 +79,8 @@ wherever you keep things.
 
 **Git,** if you use it: clone or fork [github.com/sagdish/personal_OS](https://github.com/sagdish/personal_OS).
 
-## Install
-
-In Terminal, go into the folder. The easy way: type `cd ` (with a space after it), drag the folder
-from Finder onto the Terminal window, press Return. Then type:
+**4. The install.** In Terminal, go into the folder. The easy way: type `cd ` (with a space after
+it), drag the folder from Finder onto the Terminal window, press Return. Then type:
 
 ```
 node bin/os.mjs install
