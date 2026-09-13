@@ -14,7 +14,8 @@ start.
 - Ask in the language they write in. Record it as `language` (a code: `en`, `de`, `ru`, …).
 - Optional questions are introduced as optional: "Optional, skip if you like." A skip is an answer.
 - Do not explain the whole system first. One sentence of welcome, then question 1.
-- Never invent anything for them. Where they gave nothing, leave it empty.
+- Never invent anything for them. Where they gave nothing, leave it empty, and say nothing about
+  the gap in any file you write: a skipped question is not a hole to mention, it is simply absent.
 
 ## The questions
 
@@ -71,7 +72,8 @@ Machine:
    their words, and what never to say. One section per area: what it is for them, what moving it
    looks like. Short, plain, no praise, nothing they did not say or their notes do not show.
 3. Write each `areas/<key>/README.md`: the area in their words, a few lines. Apply left a skeleton
-   with their "moving" line.
+   with their "moving" line. If they gave little, the file stays short; never write that something
+   is missing or "not yet" given.
 4. `node bin/os.mjs doctor`. Fix anything red.
 5. `node bin/os.mjs read --force`: the first read. If it fails, say exactly what it said and stop.
 6. `node bin/os.mjs install`: the schedule and the `os` alias. On Linux and Windows this prints a

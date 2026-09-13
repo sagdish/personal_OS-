@@ -140,7 +140,7 @@ async function cmdStart(flags) {
   const up = await startApp();
   const d = await doctor();
   say(formatDoctor(d));
-  if (up && !flags.has("--no-open")) openBrowser(`http://localhost:${appPort()}`);
+  if (up && !flags.has("--no-open") && !process.env.OS_NO_OPEN) openBrowser(`http://localhost:${appPort()}`);
   say("");
   say(`  page      ${B}http://localhost:${appPort()}${R}`);
   say(`  your AI   run ${B}claude${R} in this folder (or your own tool) and type /coach-<area>, /capture, /brief`);
@@ -237,7 +237,7 @@ function cmdInstall(flags) {
   say(`\n${B}Personal OS${R} ${D}— ${OS_ROOT}${R}\n`);
   if (!ensureAppDeps()) process.exit(1);
   good("packages installed");
-  if (!flags.has("--no-alias")) good(schedule.installAlias());
+  if (!flags.has("--no-alias") && !process.env.OS_NO_ALIAS) good(schedule.installAlias());
   if (!isSetUp()) {
     step("the schedule is installed at the end of setup");
     say(NOT_SET_UP);

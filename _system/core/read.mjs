@@ -45,6 +45,8 @@ Return exactly ONE JSON object and nothing else, with these keys:
 
 "file": which inbox entries to copy, as a list of {"id": "...", "to": "wins" | "goals" | "challenge", "area": "<area key>" | null}. "wins" when the entry says something was finished, shipped, done or overcome. "goals" when it is a task they gave themselves; set "area" to the area it belongs to. "challenge" when it is an attempt for their challenge (FACTS.challenge). Use only ids from FACTS.inbox whose "filed" is null, and only the destinations named in FACTS.modules. When unsure, leave it out. You never rewrite their words: the machine copies the entry itself.
 
+If FACTS.first_read is true, this is the first read ever: say so in one line, say what the OS now holds for them in their words, and leave "moved" empty. Files created by the setup itself are not something they did.
+
 Use only what FACTS holds. If FACTS._trimmed is present, what it names was not shown to you.`;
 
 class Refusal extends Error {

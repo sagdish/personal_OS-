@@ -9,6 +9,7 @@ const q = (s) => String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"').slice(0, 
 export function notify(title, message) {
   return new Promise((resolve) => {
     const done = () => resolve();
+    if (process.env.OS_NO_NOTIFY) return done(); // tests
     if (process.platform === "darwin") {
       execFile("osascript", ["-e", `display notification "${q(message)}" with title "${q(title)}"`], done);
     } else if (process.platform === "linux") {

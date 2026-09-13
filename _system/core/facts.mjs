@@ -53,6 +53,7 @@ export function gatherFacts() {
     language: language(),
     name: owner(),
     modules: Object.keys(mods).filter((k) => mods[k]),
+    first_read: !prev,
     next_step: Boolean(rhythm().next_step),
     areas: {},
     daily: {},

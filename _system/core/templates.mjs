@@ -6,7 +6,7 @@ import YAML from "yaml";
 const yamlStr = (s) => JSON.stringify(String(s ?? ""));
 
 export function osYaml(a) {
-  const header = `# ${a.os_name} — the map. Written by \`os apply\` from your setup answers; edit by hand if you like.
+  const header = `# ${a.os_name} — the map. Written by \`os apply\`. Edit by hand, then run \`os apply\` again.
 # Areas: 1 to 5, no more. Modules are on or off. The read runs at read_at, your machine's clock.
 `;
   const doc = {
@@ -64,7 +64,7 @@ export function agentsMd(a) {
     mods.wins ? 'When something is finished, shipped or overcome, one line goes to wins the same turn: `node bin/os.mjs win "their words"`.' : null,
     mods.goals ? "A task goes to goals.md under its area, never to a list of your own." : null,
     `Speak in ${a.language || "their language"}, in the voice MANAGER.md describes.`,
-    "Do not edit `_system/`. Do not edit `os.yaml` unless they ask; `os apply` rewrites it from setup answers.",
+    "Do not edit `_system/`. `os.yaml` is theirs; after any edit to it, `node bin/os.mjs apply` rebuilds the folders, the coaches and this file.",
   ].filter(Boolean);
 
   const where = [
