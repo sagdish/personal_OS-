@@ -1,10 +1,32 @@
 {
   "name": "personal-os",
   "version": "0.1.0",
-  "private": true,
-  "license": "MIT",
   "description": "Your life as plain files, one AI voice that reads them once a day, a page that shows where you stand.",
+  "license": "MIT",
   "type": "module",
+  "bin": {
+    "personal-os": "bin/create.mjs"
+  },
+  "files": [
+    "bin",
+    "_system/core",
+    "_system/state/.gitkeep",
+    "_system/logs/.gitkeep",
+    "app/app",
+    "app/components",
+    "app/lib",
+    "app/core.d.ts",
+    "app/next-env.d.ts",
+    "app/next.config.ts",
+    "app/tsconfig.json",
+    "app/package.json",
+    ".claude",
+    ".gitignore",
+    "CLAUDE.md",
+    "SETUP.md",
+    "README.md",
+    "LICENSE"
+  ],
   "engines": {
     "node": ">=20"
   },
@@ -16,5 +38,6 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.125.0",
     "yaml": "^2.9.1"
-  }
+  },
+  "keywords": ["personal-os", "life-os", "markdown", "claude-code", "second-brain"]
 }

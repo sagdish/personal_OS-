@@ -14,6 +14,11 @@ export const LABEL = `com.personal-os.tick.${hash}`;
 const LAUNCH_DIR = process.env.OS_LAUNCH_DIR || path.join(os.homedir(), "Library", "LaunchAgents");
 export const PLIST = path.join(LAUNCH_DIR, `${LABEL}.plist`);
 const script = path.join(OS_ROOT, "bin", "os.mjs");
+// OS_NO_LAUNCHCTL=1 writes the job file without loading it (tests). Never set it by hand.
+const launchctl = (verb) => {
+  if (process.env.OS_NO_LAUNCHCTL) return;
+  execFileSync("launchctl", [verb, PLIST], { stdio: "ignore" });
+};
 
 const plist = (node) => `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -70,8 +75,8 @@ export function install({ yes = false } = {}) {
   if (process.platform === "darwin") {
     fs.mkdirSync(LAUNCH_DIR, { recursive: true });
     fs.writeFileSync(PLIST, plist(process.execPath));
-    try { execFileSync("launchctl", ["unload", PLIST], { stdio: "ignore" }); } catch { /* not loaded yet */ }
-    execFileSync("launchctl", ["load", PLIST], { stdio: "ignore" });
+    try { launchctl("unload"); } catch { /* not loaded yet */ }
+    launchctl("load");
     return `scheduled: ${LABEL}, every 30 minutes. The read runs at the time in os.yaml, your machine's clock.`;
   }
   if (process.platform === "linux") {
@@ -89,7 +94,7 @@ export function install({ yes = false } = {}) {
 export function uninstall() {
   if (process.platform === "darwin") {
     if (!fs.existsSync(PLIST)) return "no schedule was installed.";
-    try { execFileSync("launchctl", ["unload", PLIST], { stdio: "ignore" }); } catch { /* fine */ }
+    try { launchctl("unload"); } catch { /* fine */ }
     fs.rmSync(PLIST, { force: true });
     return `removed ${LABEL}.`;
   }

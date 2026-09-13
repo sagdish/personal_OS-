@@ -226,6 +226,7 @@ function cmdApply() {
   say(`\nnext: write the words into MANAGER.md and each area's README.md, then \`os doctor\`, \`os read\`, \`os install\`, \`os\`.`);
 }
 
+/** The install: the packages, the `os` alias, and, once the OS is set up, the schedule. */
 function cmdInstall(flags) {
   if (flags.has("--uninstall")) {
     say(schedule.uninstall());
@@ -233,8 +234,17 @@ function cmdInstall(flags) {
     if (a) say(a);
     return;
   }
-  say(schedule.install({ yes: flags.has("--yes") }));
-  say(schedule.installAlias());
+  say(`\n${B}Personal OS${R} ${D}— ${OS_ROOT}${R}\n`);
+  if (!ensureAppDeps()) process.exit(1);
+  good("packages installed");
+  if (!flags.has("--no-alias")) good(schedule.installAlias());
+  if (!isSetUp()) {
+    step("the schedule is installed at the end of setup");
+    say(NOT_SET_UP);
+    return;
+  }
+  good(schedule.install({ yes: flags.has("--yes") }));
+  say("");
 }
 
 function cmdInbox(args) {
@@ -257,7 +267,7 @@ const HELP = `os — the one command
   os read             the read, now  (--dry-run shows what it would send, free · --force skips the cooldown)
   os tick             what the schedule runs every 30 minutes
   os apply            build the structure from the setup answers
-  os install          the schedule and the os alias  (--uninstall removes both · --yes adds the cron line on Linux)
+  os install          the packages, the os alias and, once set up, the schedule  (--uninstall · --yes adds the cron line on Linux · --no-alias)
   os inbox sort       move the dock into the inbox tree now.  os inbox list [days] prints entries with ids
   os capture "text"   append to the dock, verbatim, stamped
   os portrait <key>   who the user is, for one voice: an area key, or all

@@ -22,18 +22,22 @@ remember to open, therapy.
 
 ## Get it
 
-Either:
+Any one of these, same result:
 
-- **Clone or fork** this repository, or
-- **Download the zip**, unzip it anywhere. No git needed, ever.
+```
+npx personal-os my-os          # makes the folder and installs it
+```
+
+or clone or fork this repository, or download the zip and unzip it anywhere. No git needed, ever.
 
 Then, in a terminal, inside the folder:
 
 ```
-bin/os
+bin/os install
 ```
 
-The first run installs the packages (a minute or two) and then tells you what to do next, which is:
+It installs the packages (a minute or two) and the `os` alias, then tells you what to do next,
+which is:
 
 ## Set up
 
@@ -80,7 +84,7 @@ In your AI (Claude Code: type it; other tools: "run the <name> skill", or read
 | `/coach-off` | drops the coach |
 | `/weekly` | (if you turned it on) the week from above, written to your journal |
 
-In a terminal (`os` after `os install`; `bin/os` before):
+In a terminal (`os` after `os install`; `bin/os` before; on Windows `node bin\\os.mjs`):
 
 | Command | What it does |
 |---|---|
@@ -89,7 +93,7 @@ In a terminal (`os` after `os install`; `bin/os` before):
 | `os status` | what is up, what is down, your areas and commands |
 | `os doctor` | the pollution check. Red is a real fault and says the fix |
 | `os read` | the read, now. `--dry-run` shows what it would send, free. `--force` skips the ten-minute cooldown |
-| `os install` | the schedule and the `os` alias. `--uninstall` removes both |
+| `os install` | the packages, the `os` alias and, once set up, the schedule. `--uninstall` removes the schedule and the alias |
 | `os inbox sort` | move the inbox dock into the tree now. `os inbox list [days]` prints entries with their ids |
 | `os capture "text"` | append to the inbox from a script or a shortcut |
 | `os win "text"` | one line to wins.md |
@@ -176,7 +180,7 @@ after five minutes. Pause it at Control.
 
 ## Schedule
 
-`os install` puts one job on your machine that runs `os tick` every 30 minutes. The tick sorts the
+`os install`, run once the OS is set up, puts one job on your machine that runs `os tick` every 30 minutes. The tick sorts the
 inbox and, once the clock passes your read time and today's read has not run, runs it. It costs
 nothing on its own. A missed morning (the machine was asleep) runs when the machine is back.
 
