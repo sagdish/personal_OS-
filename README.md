@@ -1,295 +1,259 @@
 # Personal OS
 
-Your life as plain files. One AI voice that reads them once a day and tells you where you stand,
-in your own words, with no scoreboard. A page that shows it. A setup that builds all of it around
-you, one question at a time, in about ten minutes.
+Your life as plain text files on your own computer. Once a day an AI reads them and tells you
+where you stand, in your own words, with no score and no nagging. A page shows it. A ten-minute
+setup builds it around you: your areas, your voice, your rhythm.
 
-Everything lives on your computer as markdown files. No account, no cloud, no lock-in. Works with
-Claude Code and a Claude subscription out of the box; with an API key or another AI provider if you
-choose that at setup. Delete the machine and your life is still there as files you can read.
+It is not a task manager, not a habit app with streaks, not a chat you have to remember to open.
 
-**What it is not:** a task manager that nags, a habit app with streaks, a chat you have to
-remember to open, therapy.
+## The short version
 
-## Install
-
-One command, on a Mac or Linux. Open Terminal (Mac: press ⌘ and Space together, type `Terminal`,
-press Return), paste this, press Return:
+Mac or Linux. Open Terminal and paste these, one at a time:
 
 ```
 curl -fsSL https://raw.githubusercontent.com/sagdish/personal_OS/main/install.sh | bash
 ```
 
-It makes a `personal-os` folder in your home folder, puts Node and Claude Code on your computer if
-you don't have them (the Mac asks for your password once, for Node), installs the OS, and ends with
-the three lines to type next. A few minutes, a lot of text scrolling by; that is normal.
+Open a **new** Terminal window, then:
 
-Already downloaded the zip, or cloned it? Go into the folder in Terminal and type `bash install.sh`.
-Same thing, without the download.
+```
+cd personal-os
+claude
+```
 
-**Windows,** or if you would rather do each step yourself: the next section. Otherwise skip to
-[Set up](#set-up).
+Inside Claude, type `/setup` and answer the questions. That is all. The rest of this file explains
+each part.
+
+## Install
+
+The one command above does four things: it puts a `personal-os` folder in your home folder, it
+installs Node if you don't have it (the Mac asks for your password once), it installs Claude Code
+if you don't have it, and it installs the OS. A few minutes. A lot of text scrolls by; that is normal.
+At the end it prints the three lines to type next.
+
+To open Terminal on a Mac: press ⌘ and Space together, type `Terminal`, press Return.
+
+If you downloaded the zip or cloned the repository instead: go into that folder in Terminal and type
+`bash install.sh`. Same result, no download.
+
+Windows, or if you want to do each step yourself: see [By hand](#by-hand) at the end.
+
+## Set up
+
+1. Open a **new** Terminal window. The `os` shortcut exists only in windows opened after the install.
+2. Go into the folder: type `cd personal-os` (or type `cd `, then drag the folder onto the window).
+3. Type `claude`. The first time it asks you to sign in with your Claude account (Pro or Max), and
+   whether you trust the files in this folder. Say yes.
+4. Type `/setup`.
+5. Answer the questions, one at a time: your name, what to call the OS, the parts of your life it
+   should hold (one to five), how it should talk to you, where you write (inside this folder is
+   fine), when the morning read should arrive. Then a few optional things, each marked optional;
+   skip what you don't want. Claude asks permission before it runs a command or writes a file. Say
+   yes; that is the setup working.
+
+At the end it writes your portrait, runs the first read, sets the daily schedule, and opens the page
+in your browser. Done. Re-run `/setup` whenever your life changes; it changes only what you change.
+
+## Every day
+
+1. **Write.** Anything, anywhere in your journal: the capture box on the page, `/capture` inside
+   Claude, or your phone through Obsidian if you use it. Your words, any format. Nothing you write
+   is ever changed or deleted.
+2. **Read.** The read arrives at your time, as a banner on a Mac and on the page. Where you stand,
+   one line per area, what moved, at most one question. It also files what you wrote: a finished
+   thing to wins, a task to goals, word for word.
+3. **Look** when you want to: [http://localhost:3300](http://localhost:3300). If the page is not
+   up, type `os` in Terminal.
+
+A quiet day is not a miss. Nothing counts your days.
+
+## Questions
+
+**Does it cost money?** Claude Code needs a Claude subscription (Pro or Max). The daily read uses
+that subscription once a day. Nothing else costs anything. If you chose an API key at setup, a read
+costs about ten cents.
+
+**Do I need to know how to code?** No. You type a few commands from this file. The AI does the rest.
+
+**Where is my data?** On your computer, as text files you can open with anything. Nothing goes to
+the cloud except one message a day to your AI provider: the facts of your day and your portrait.
+The page runs on your machine only.
+
+**Can I use it on my phone?** For writing, yes, if your journal is an Obsidian folder (say so at
+setup). The page itself is on your computer.
+
+**What if I stop using it?** The files stay. Delete the folder and it is gone. Nothing else changes.
+
+**Can I change my areas later?** Yes. Type `/setup` again inside Claude. Your notes stay.
+
+**Can I use another AI instead of Claude Code?** Yes. Any tool that can open a folder and follow
+instructions. Tell it "open SETUP.md and follow it". The daily read then needs an API key, which
+setup asks for.
+
+**Does the read run when the laptop is closed?** No. It runs when the machine is awake and the time
+has passed. A missed morning runs when the lid opens.
+
+**Is anything sent without me knowing?** Once a day, the read. Nothing else, ever. `os read --dry-run`
+shows you exactly what it would send.
+
+## Commands
+
+Inside Claude, type the command.
+
+| Command | What it does |
+|---|---|
+| `/setup` | the questions. Re-run any time |
+| `/capture` | keep what you just said, word for word |
+| `/triage` | sort the inbox now. The read does this daily on its own |
+| `/brief` | run the read now |
+| `/coach-<area>` | talk to the coach of one area, for example `/coach-health`. It knows your portrait, that area, and where you left off |
+| `/coach-off` | drop the coach |
+| `/weekly` | the week from above, if you turned it on |
+
+In Terminal, inside the folder. (`os` works after the install. `node bin/os.mjs` always works; on
+Windows type `node bin\os.mjs`.)
+
+| Command | What it does |
+|---|---|
+| `os` | start the page and open it. Safe to repeat. `os --no-open` skips the browser |
+| `os stop` | stop the page |
+| `os status` | what is up, what is down, your areas and commands |
+| `os doctor` | check the structure. Red is a real fault and says the fix |
+| `os read` | the read, now. `--dry-run` shows what it would send, free. `--force` skips the ten-minute wait |
+| `os install` | the packages, the `os` shortcut and, once set up, the schedule. `--uninstall` removes the schedule and the shortcut |
+| `os inbox list 14` | the last two weeks of inbox entries, with their ids. `os inbox sort` files the dock now |
+| `os capture "text"` | keep a line from a script or a shortcut |
+| `os win "text"` | one line to your wins |
+| `os file <id> <to>` | copy one inbox entry to `wins`, `goals` (add the area) or `challenge` |
+| `os portrait <area>` | print your portrait for one voice; `all` for the whole thing |
+
+## Where things are
+
+```
+README.md        this file
+SETUP.md         the questions your AI asks
+AGENTS.md        what any AI reads first: whose OS this is, the rules, where things live. Written by setup
+CLAUDE.md        one line for Claude Code: read AGENTS.md
+os.yaml          the map: your areas, what is on, your read time. Written by setup, yours to edit
+MANAGER.md       your portrait: who you are, how every voice talks to you. Yours to edit
+STATUS.md        where you stand, written by the read. Never edit it
+areas/<area>/    one folder per area: a README in your words, notes/ for anything
+journal/         your writing, or the Obsidian folder you named at setup
+  inbox.md         the dock: anything, from any device
+  inbox/           the dock's entries, kept by day, for good
+  daily/           one note per day, YYYY-MM-DD.md
+  wins.md          one line per thing done (if you turned it on)
+  goals.md         your tasks, one heading per area (if on)
+  challenge.md     your challenge record (if on)
+  reads/           every read, dated
+  weeks/           weekly reviews (if on)
+.claude/skills/  the commands above, one file each
+bin/os           the one command
+app/             the page
+_system/         the machine. Not yours to edit
+node_modules/    the packages the install downloaded. Big, normal, leave it
+.env.local       keys, if you gave any. Never in git
+```
+
+**The journal is yours.** The machine only adds to it, and only your own words: a win, a task, a
+challenge line, a copy of each read. It never edits or deletes what you wrote.
+
+## The daily read
+
+What it sees: the date; what changed in each area this week; yesterday's and today's daily note;
+the last few days of inbox entries; your last wins and open goals, if those are on; its own last
+three reads, so it does not repeat itself. All of it computed from your files and kept small.
+
+Who it is: `MANAGER.md`, your portrait. Nothing else knows you. Edit it and the voice changes.
+
+What it writes: `STATUS.md`, a copy in your journal under `reads/`, the lines it filed, one banner.
+If the call fails, the previous read stays and the page says so. It never fakes a read.
+
+Limits: once a day at your time; `os read` runs it again but not within ten minutes of the last
+one; at most three calls a day unless you raise it in `os.yaml`; a call is stopped after five
+minutes. Pause it on the Control page.
+
+Who runs it (`provider.kind` in `os.yaml`): `claude-code`, your subscription, the default and the
+only one that needs no key. `anthropic`, an Anthropic API key in `.env.local`. `openai-compatible`,
+any other service with an OpenAI-style endpoint, key in `.env.local`, address and model in `os.yaml`.
+
+## The page
+
+[http://localhost:3300](http://localhost:3300), on your machine only.
+
+- **Home**: the read, the capture box, your areas, then only what you turned on: your list, wins,
+  the practice ticks, the challenge. A red strip only when something is broken.
+- **An area**: its README, its open tasks, its notes, which coach to type.
+- **Any file**: rendered, with an edit button that keeps the file exactly as it is.
+- **History**: every read, newest first.
+- **Control**: pause, run now, sort the inbox, the schedule, the check, the last ten calls, the log.
+- **Help**: this file, plus your own setup.
+
+## Changing things
+
+- Your areas, what is on, the read time, the provider: `/setup` again, or edit `os.yaml` and run
+  `os apply`. Notes and journal files are never touched. Five areas is the cap; a sixth means
+  dropping one.
+- How it talks to you: edit `MANAGER.md`. Plain text, keep the headings.
+- Where things go: you don't decide. Write anywhere; the read files it.
+
+## Privacy, git, backups
+
+- Git is optional. Nothing here needs it.
+- If the folder is a git repository, setup asks once whether your personal files stay out of git.
+  Yes, the default, means a public fork leaks nothing. No means everything commits, for a private
+  backup repo. Change it later in `os.yaml` (`git.life_in_git`) and run `os apply`.
+- By default your life exists only on this disk. Back the folder up like any other, or point the
+  journal at a synced folder at setup.
+
+## When something looks wrong
+
+| You see | What to do |
+|---|---|
+| `node: command not found` | Node is not installed, or this window is older than the install. Install it from nodejs.org, then open a new window |
+| `os: command not found` | open a new Terminal window. Or type `node bin/os.mjs` instead of `os` |
+| `claude: command not found` | Claude Code is not installed, or the window is old. See By hand, then a new window |
+| `npm install failed` | usually no internet. Try again. If it keeps failing, type `npm install` inside the folder and read the last lines |
+| the page did not open, or `page down` | type `os`. If it says something still listens on port 3300, change `app.port` in `os.yaml` and type `os` again |
+| the read did not arrive | `os status` names the reason: paused, the daily cap, the provider not ready, or the schedule not installed. Each line says the fix. A sleeping Mac runs it when it wakes |
+| red lines in `os doctor` | each names the file and the fix |
+| anything else | the logs in `_system/logs/`: `os.log` (the machine), `tick.log` (the schedule), `app.log` (the page) |
 
 ## By hand
 
-What the one command does, as steps. You need two things on your computer first.
+What the one command does, as steps. Also the way on Windows.
 
-**1. Node.** The engine everything here runs on. To check whether you have it, open Terminal
-(Mac: press ⌘ and Space together, type `Terminal`, press Return) and type this, then Return:
+**1. Node.** Type `node --version` in Terminal. A number of 20 or more means you have it. If not:
+[nodejs.org](https://nodejs.org), the big green download button, run the installer. Then open a
+new Terminal window.
 
-```
-node --version
-```
-
-If you see a number like `v22.11.0` and it is 20 or higher, you have it. If you see
-`command not found`, go to [nodejs.org](https://nodejs.org), click the big green download button
-(the LTS version), open the file it downloads and click through the installer. Then close Terminal,
-open it again, and check again.
-
-**2. Claude Code.** The AI that runs your setup and your coaches. It needs a Claude subscription
-(Pro or Max). To check, type `claude --version` in Terminal. If it prints a number, you have it. If
-not, paste this into Terminal and press Return:
+**2. Claude Code.** Type `claude --version`. A number means you have it. If not, Mac or Linux:
 
 ```
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-Then open a new Terminal window and type `claude` once to sign in.
-
-Another AI tool instead of Claude Code (Cursor, Codex, Gemini CLI, anything that can open a folder
-and follow instructions) works too. The daily read then needs an API key; setup asks for it.
-
-**Windows:** everything below works in PowerShell. Where this manual says `bin/os`, type
-`node bin\os.mjs`. Where it says `os`, the same.
-
-**3. The folder.** Any one of these gives you the same folder.
-
-**The quick way.** In Terminal, type this and press Return:
+Windows, in PowerShell:
 
 ```
-npx personal-os my-os
+irm https://claude.ai/install.ps1 | iex
 ```
 
-It makes a folder called `my-os` in the folder Terminal is in (your home folder, unless you moved),
-with everything inside, and installs the first packages. Name it anything instead of `my-os`.
+Then open a new window and type `claude` once to sign in.
 
-**The zip.** On [the GitHub page](https://github.com/sagdish/personal_OS), click the green **Code**
-button, then **Download ZIP**. Double-click the downloaded file to unzip it. You get a folder; put it
-wherever you keep things.
+**3. The folder.** One of: `npx personal-os my-os` in Terminal, which makes the folder for you; or
+the green **Code** button then **Download ZIP** on [the GitHub page](https://github.com/sagdish/personal_OS),
+unzip by double-clicking; or `git clone https://github.com/sagdish/personal_OS.git`.
 
-**Git,** if you use it: clone or fork [github.com/sagdish/personal_OS](https://github.com/sagdish/personal_OS).
-
-**4. The install.** In Terminal, go into the folder. The easy way: type `cd ` (with a space after
-it), drag the folder from Finder onto the Terminal window, press Return. Then type:
+**4. The install.** Go into the folder in Terminal (`cd `, drag the folder onto the window, Return),
+then:
 
 ```
 node bin/os.mjs install
 ```
 
-It downloads the page's packages (a minute or two; a lot of text scrolls by, that is normal) and
-adds the `os` shortcut to your shell. At the end it prints "Personal OS is not set up yet" and the
-two steps that come next, which are the ones below.
-
-**Open a new Terminal window now.** The `os` shortcut only exists in windows opened after the
-install. From here on, `os` is the command; `node bin/os.mjs` always does the same thing.
-
-## Set up
-
-In the new window, go into the folder again (`cd `, drag, Return) and type:
-
-```
-claude
-```
-
-The first time, Claude Code asks whether you trust the files in this folder. Say yes. Then type:
-
-```
-/setup
-```
-
-and answer the questions. One at a time: your name, what to call the OS, the parts of your life it
-should hold (one to five), how it should talk to you, where you write, when the morning read should
-arrive. Then a few optional things, each marked optional; skip what you don't want. Then how the
-read runs: Claude Code with your subscription is the default and needs nothing.
-
-Claude Code asks permission before it runs a command or writes a file. Say yes; that is the setup
-doing its work.
-
-At the end it writes your portrait, checks the structure, runs the first read, installs the
-schedule and opens the page in your browser. You see where you stand before you close the window.
-
-Re-run `/setup` whenever your life changes. It changes only what you change.
-
-## Every day
-
-1. **Write anywhere in your journal.** The inbox for anything quick: the capture box on the page,
-   `/capture` in Claude Code, or your phone through Obsidian if you use it. Your daily note for the
-   day. Your words, any format. Nothing you write is ever edited or deleted.
-2. **The read arrives** at your time, as a banner on a Mac and on the page. It says where you
-   stand, one line per area, what moved, and at most one question. It files what you wrote where it
-   belongs: a finished thing to wins, a task to goals, an attempt to your challenge record, copied
-   word for word. It never assigns you work unless you asked for one next step at setup.
-3. **Open the page** when you want to see it: [http://localhost:3300](http://localhost:3300). If it
-   is not up, type `os` in Terminal.
-
-That is the whole practice. A quiet day is not a miss.
-
-## Commands
-
-In Claude Code, type the command. In another tool, say "run the <name> skill", or ask it to read
-`.claude/skills/<name>/SKILL.md` and follow it.
-
-| Command | What it does |
-|---|---|
-| `/setup` | the interview. Re-run any time; it changes only what you change |
-| `/capture` | appends what you just said to the inbox, verbatim, stamped |
-| `/triage` | sorts the inbox now: copies entries to wins, goals, the record, an area. Removes nothing. The read does this daily on its own |
-| `/brief` | runs the read now |
-| `/coach-<area>` | one per area, named after it: `/coach-health`, `/coach-career`, … Opens your portrait's shared part plus that area, the area's notes, its open tasks, and where the last session stopped |
-| `/coach-off` | drops the coach |
-| `/weekly` | (if you turned it on) the week from above, written to your journal |
-
-In Terminal, inside the folder (`os` after the install; `node bin/os.mjs` always works; on Windows
-`node bin\os.mjs`):
-
-| Command | What it does |
-|---|---|
-| `os` | start the page and open it in the browser. Safe to run twice. `os --no-open` skips the browser |
-| `os stop` | stop the page |
-| `os status` | what is up, what is down, your areas and commands |
-| `os doctor` | the structure check. Red is a real fault and says the fix |
-| `os read` | the read, now. `os read --dry-run` shows what it would send, free. `--force` skips the ten-minute cooldown |
-| `os install` | the packages, the `os` shortcut and, once set up, the schedule. `os install --uninstall` removes the schedule and the shortcut |
-| `os inbox sort` | move the inbox dock into the tree now. `os inbox list 14` prints the last two weeks' entries with their ids |
-| `os capture "text"` | append to the inbox from a script or a shortcut |
-| `os win "text"` | one line to wins.md |
-| `os file <id> <to>` | copy one inbox entry to `wins`, `goals` (add the area key) or `challenge` |
-| `os portrait <area>` | print who you are for one voice; `all` prints the whole portrait |
-| `os apply` | rebuild the structure from the setup answers |
-| `os tick` | what the schedule runs every 30 minutes |
-
-## Files and folders
-
-```
-README.md        this manual
-SETUP.md         the interview your AI runs
-AGENTS.md        what any AI reads first: whose OS this is, the rules, where things live. Written by setup
-CLAUDE.md        one line for Claude Code: read AGENTS.md
-os.yaml          the map: your areas, modules, rhythm, provider, paths. Written by setup, yours to edit
-MANAGER.md       your portrait: who you are, how every voice talks to you. Drafted by setup, yours to edit
-STATUS.md        where you stand, written by the read. Never edit it
-areas/<area>/    one folder per area: index.yaml, README.md in your words, notes/ for anything
-journal/         your writing (or the Obsidian folder you named at setup, see below)
-  inbox.md         the dock: anything, from any device
-  inbox/           the dock's entries, moved here by day once read, kept for good
-  daily/           one note per day, YYYY-MM-DD.md
-  wins.md          (module) one line per thing done, append-only
-  goals.md         (module) your tasks, one heading per area
-  challenge.md     (module) the record of your challenge, one dated line per attempt
-  reads/           every read, dated, kept
-  weeks/           (module) weekly reviews
-.claude/skills/  the commands above, one file each. Other tools read the same files
-bin/os           the one command
-app/             the page (Next.js)
-_system/         the machine: its code, its state, its logs. Not yours to edit
-.env.local       keys, if you gave any. Never in git
-node_modules/    the packages the install downloaded. Big, normal, never touch it
-```
-
-**The journal is yours.** The machine only ever appends there, and only your words: a win, a task,
-a challenge line, a copy of each read. It never edits or deletes what you wrote.
-
-**Obsidian.** If you said yes at setup, the journal is a folder inside your vault instead of
-`journal/` here. Same files, same rules, and your phone reaches it through Obsidian Sync. The page
-still shows everything.
-
-## The read
-
-One paid call a day; everything else is free.
-
-**What it sees:** the date; per area, the files touched in the last seven days; yesterday's and
-today's daily note; the inbox entries of the last three days; the last wins, the open goals, the
-week's practice ticks, the challenge record's tail, for the modules you turned on; its own last
-three reads, so it does not repeat itself. Everything capped, computed from disk. `os read --dry-run`
-prints exactly what would be sent.
-
-**Its identity:** `MANAGER.md`, whole. Nothing else knows you. Edit it and the voice changes.
-
-**What it writes:** `STATUS.md`, a copy in `journal/reads/`, the filed lines, one banner. A failed
-call keeps the previous read and says so on the page and at Control. Nothing fakes a read.
-
-**The caps:** it runs once a day at your time; `os read` runs it again but not within ten minutes
-of the last one; a daily cap on calls (3 by default, in `os.yaml`) stops any loop; a call is killed
-after five minutes. Pause it at Control.
-
-**Providers** (`provider.kind` in `os.yaml`):
-
-- `claude-code`: Claude Code with your subscription. The default, nothing to set up. It uses the
-  model Claude Code is set to; put a model id in `provider.model` to use another one for the read.
-  The cost shown at Control is Claude Code's own estimate; on a subscription it is quota, not money.
-- `anthropic`: the Anthropic API with `ANTHROPIC_API_KEY` in `.env.local`. Default model
-  `claude-opus-5`; about ten cents a read at today's prices.
-- `openai-compatible`: any service with an OpenAI-style chat endpoint: `base_url`, `model`, and
-  `OS_PROVIDER_KEY` in `.env.local` (Ollama needs no key).
-
-## The page
-
-[http://localhost:3300](http://localhost:3300), on your machine only. Started by `os`.
-
-| Route | What is on it |
-|---|---|
-| `/` | the read · the capture box · your areas, last touched · then only the modules you turned on: your list, wins, the practice strip, the challenge card · a red strip only when something is broken |
-| `/area/<area>` | the area's README, its open tasks, its notes, and which coach to type |
-| `/doc/…` | any file, rendered. Edit in place with a plain editor that keeps everything as it is |
-| `/history` | every read, newest first |
-| `/control` | pause · run now · sort the inbox · the provider · the schedule · doctor · the last ten calls with their cost · the log |
-| `/help` | this manual, plus your setup: your areas, your commands, where your journal is |
-
-## Schedule
-
-Once the OS is set up, `os install` puts one job on your machine that runs `os tick` every 30
-minutes. The tick sorts the inbox and, once the clock passes your read time and today's read has not
-run, runs it. It costs nothing on its own. A missed morning (the machine was asleep) runs when the
-machine is back.
-
-- **Mac:** installed automatically (launchd). Setup does it for you.
-- **Linux:** `os install` prints the crontab line; `os install --yes` adds it for you.
-- **Windows:** `os install` prints the `schtasks` command to run once.
-
-`os install --uninstall` removes it.
-
-## Changing your mind
-
-- **Your areas, modules, read time, provider:** re-run `/setup`, or edit `os.yaml` by hand and run
-  `os apply`. Existing notes and journal files are never touched. Adding a sixth area means
-  removing one: the cap is the design.
-- **How the voice talks to you:** edit `MANAGER.md`. It is plain text with fixed headings.
-- **Where things go:** you don't decide. Write anywhere; the read files it.
-
-## Git, privacy, backups
-
-- Git is optional. Nothing here needs it.
-- If the folder is a git repository, setup asks once whether your personal files stay out of git.
-  Yes (the default) means `os.yaml`, `MANAGER.md`, `STATUS.md`, `AGENTS.md`, `areas/`, `journal/`
-  and the coach commands are ignored, so a public fork leaks nothing. No means everything commits,
-  for a private backup repo. Change it in `os.yaml` (`git.life_in_git`) and run `os apply`.
-- With the default, **your life exists only on this disk** unless you back it up: point the journal
-  at a synced folder at setup, or back the folder up like any other.
-- What leaves your machine: once a day, the facts above and your portrait go to the provider you
-  chose. Nothing else, ever. The page talks to no network.
-
-## When something looks wrong
-
-| You see | What it means, what to do |
-|---|---|
-| `node: command not found` | Node is not installed, or this window was opened before you installed it. Install it from nodejs.org, then open a new Terminal window |
-| `os: command not found` | open a new Terminal window; the shortcut appears only in new ones. Or type `node bin/os.mjs` instead of `os` |
-| `claude: command not found` | Claude Code is not installed, or the window is old. Install it (see Before you start), then a new window |
-| `npm install failed` | usually no internet, or a company proxy. Try again; if it keeps failing, run `npm install` inside the folder and read the last lines |
-| the page did not open, or `page down` | type `os`. If it says something still listens on port 3300, another program uses it: change `app.port` in `os.yaml` and type `os` again |
-| the read did not arrive | `os status` says which of the four it is: paused, the daily cap reached, the provider not ready, the schedule not installed. Each line says the fix. A sleeping Mac runs it when it wakes |
-| red lines in `os doctor` | each names the file and the fix |
-| something else | the logs in `_system/logs/`: `os.log` (the machine), `tick.log` (the schedule), `app.log` (the page) |
+Then continue at [Set up](#set-up). On Windows, use `node bin\os.mjs` wherever this file says `os`,
+and `/setup` prints the one line to schedule the daily read.
 
 ## Credits and license
 
