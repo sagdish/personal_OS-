@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Personal OS — the one-command install for Mac and Linux.
 #
-#   curl -fsSL https://raw.githubusercontent.com/sagdish/personal_OS/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/sagdish/personal_OS-/main/install.sh | bash
 #
 # Gets the folder (into ./personal-os, or PERSONAL_OS_DIR), puts Node and Claude Code on this
 # machine if they are missing, installs the OS, and prints what to type next. Inside a folder you
@@ -35,12 +35,12 @@ else
     exit 1
   fi
   if have git; then
-    run git clone --quiet --depth 1 https://github.com/sagdish/personal_OS.git "$DIR"
+    run git clone --quiet --depth 1 https://github.com/sagdish/personal_OS-.git "$DIR"
   else
     TMP="$(mktemp -d)"
-    run curl -fsSL -o "$TMP/os.zip" https://github.com/sagdish/personal_OS/archive/refs/heads/main.zip
+    run curl -fsSL -o "$TMP/os.zip" https://github.com/sagdish/personal_OS-/archive/refs/heads/main.zip
     run unzip -q "$TMP/os.zip" -d "$TMP"
-    run mv "$TMP/personal_OS-main" "$DIR"
+    run mv "$TMP/personal_OS--main" "$DIR"
     rm -rf "$TMP"
   fi
   say "  done"

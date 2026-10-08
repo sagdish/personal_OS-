@@ -49,10 +49,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sagdish/personal_OS.git"
+    "url": "git+https://github.com/sagdish/personal_OS-.git"
   },
-  "homepage": "https://github.com/sagdish/personal_OS#readme",
+  "homepage": "https://github.com/sagdish/personal_OS-#readme",
   "bugs": {
-    "url": "https://github.com/sagdish/personal_OS/issues"
+    "url": "https://github.com/sagdish/personal_OS-/issues"
   }
 }

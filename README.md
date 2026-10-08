@@ -11,7 +11,7 @@ It is not a task manager, not a habit app with streaks, not a chat you have to r
 Mac or Linux. Open Terminal and paste these, one at a time:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/sagdish/personal_OS/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/sagdish/personal_OS-/main/install.sh | bash
 ```
 
 Open a **new** Terminal window, then:
@@ -252,8 +252,8 @@ irm https://claude.ai/install.ps1 | iex
 Then open a new window and type `claude` once to sign in.
 
 **3. The folder.** Either the green **Code** button then **Download ZIP** on
-[the GitHub page](https://github.com/sagdish/personal_OS), unzip by double-clicking, and put the
-folder wherever you keep things; or `git clone https://github.com/sagdish/personal_OS.git`.
+[the GitHub page](https://github.com/sagdish/personal_OS-), unzip by double-clicking, and put the
+folder wherever you keep things; or `git clone https://github.com/sagdish/personal_OS-.git`.
 
 **4. The install.** Go into the folder in Terminal (`cd `, drag the folder onto the window, Return),
 then:
